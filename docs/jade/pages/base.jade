@@ -1,7 +1,7 @@
 extends ../layout
 
 block nav
-  - page_name = 'base'
+  - page_name = 'index'
 
 block content
   - btn_th = ['Button', 'Input', 'class=""', 'Description']
@@ -9,7 +9,8 @@ block content
   - menu_items.push({ name: 'Buttons', anchor: 'buttons'})
   - menu_items.push({ name: 'Tables', anchor: 'tables'})
   - menu_items.push({ name: 'Forms', anchor: 'forms'})
-  - nav_mitems = ['Trello', 'Github']
+  - nav_mitems = [{ name: 'Code', url: 'https://github.com/mockee/arkui' }]
+  - nav_mitems.push({ name: 'Issues', url: 'https://github.com/mockee/arkui/issues' })
 
   - tags = ['小说', '悬疑', '推理', '神秘主义', '密室', '本格', '重口味', '成长']
   - list_items = ['UNITAS', 'World Literature', 'Guokr Reading', 'Scientific American', 'World Architecture', 'Douban Read']
@@ -42,7 +43,7 @@ block content
         ul.items.items-minor
           each mitem in nav_mitems
             li
-              a(href='#')= mitem
+              a(href=mitem.url, target="_blank")= mitem.name
 
   .mod#typography
     .hd
@@ -201,27 +202,27 @@ block content
                   .field-group
                     label.field-label Radios
                     .fields-inline
-                      each i in [1,2,3]
-                        radioState = i === 1 ? 'checked' : ''
-                        label.radio
-                          if (radioState === 'checked')
+                      each val in [1,2,3]
+                        if val === 1
+                          label.radio
                             input(type='radio', name='radios', checked)
-                            = 'item' + i
-                          else
+                            = 'item' + val
+                        else
+                          label.radio
                             input(type='radio', name='radios')
-                            = 'item' + i
+                            = 'item' + val
                   .field-group
                     label.field-label Checkboxs
                     .fields-inline
-                      each i in [1,2,3,4,5]
-                        checkboxState = (i === 1 || i === 2) ? 'checked' : ''
-                        label.checkbox
-                          if (checkboxState)
+                      each val in [1,2,3,4,5]
+                        if val === 1
+                          label.checkbox
                             input(type='checkbox', checked)
-                            = 'item' + i
-                          else
+                            = 'item' + val
+                        else
+                          label.checkbox
                             input(type='checkbox')
-                            = 'item' + i
+                            = 'item' + val
                   .field-group
                     label.field-label Disabled input
                     .fields
